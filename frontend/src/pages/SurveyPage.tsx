@@ -94,7 +94,7 @@ export default function SurveyPage() {
       <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
         <div
           className="h-full bg-indigo-600 transition-all duration-300"
-          style={{ width: `${(answeredCount / totalQuestions) * 100}%` }}
+          style={{ width: `${totalQuestions > 0 ? (answeredCount / totalQuestions) * 100 : 0}%` }}
         />
       </div>
 

@@ -28,23 +28,6 @@ router.get('/', (req, res) => {
   }
 });
 
-// Get single topic
-router.get('/:id', (req, res) => {
-  try {
-    const { id } = req.params;
-    const topic = db.prepare('SELECT * FROM topics WHERE id = ?').get(id) as Topic | undefined;
-
-    if (!topic) {
-      return res.status(404).json({ error: 'Topic not found' });
-    }
-
-    res.json(topic);
-  } catch (error) {
-    console.error('Error fetching topic:', error);
-    res.status(500).json({ error: 'Failed to fetch topic' });
-  }
-});
-
 // Get questions for a topic
 router.get('/:id/questions', (req, res) => {
   try {
@@ -100,6 +83,23 @@ router.get('/:id/progress/:userId', (req, res) => {
   } catch (error) {
     console.error('Error fetching progress:', error);
     res.status(500).json({ error: 'Failed to fetch progress' });
+  }
+});
+
+// Get single topic (must be after more specific routes)
+router.get('/:id', (req, res) => {
+  try {
+    const { id } = req.params;
+    const topic = db.prepare('SELECT * FROM topics WHERE id = ?').get(id) as Topic | undefined;
+
+    if (!topic) {
+      return res.status(404).json({ error: 'Topic not found' });
+    }
+
+    res.json(topic);
+  } catch (error) {
+    console.error('Error fetching topic:', error);
+    res.status(500).json({ error: 'Failed to fetch topic' });
   }
 });
 
