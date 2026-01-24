@@ -1,0 +1,189 @@
+/* Component styles for Cross Talk app */
+
+/* Button variants */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background-color: rgb(79 70 229);
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: rgb(67 56 202);
+}
+
+.btn-secondary {
+  background-color: rgb(243 244 246);
+  color: rgb(55 65 81);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: rgb(229 231 235);
+}
+
+.btn-success {
+  background-color: rgb(22 163 74);
+  color: white;
+}
+
+.btn-success:hover:not(:disabled) {
+  background-color: rgb(21 128 61);
+}
+
+.btn-lg {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+}
+
+/* Form inputs */
+.input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgb(209 213 219);
+  border-radius: 0.5rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input:focus {
+  border-color: rgb(99 102 241);
+  box-shadow: 0 0 0 3px rgb(99 102 241 / 0.1);
+}
+
+/* Selection buttons (for survey questions) */
+.selection-btn {
+  width: 100%;
+  text-align: left;
+  padding: 1rem;
+  border: 2px solid rgb(229 231 235);
+  border-radius: 0.5rem;
+  background-color: white;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.selection-btn:hover {
+  border-color: rgb(209 213 219);
+}
+
+.selection-btn.selected {
+  border-color: rgb(79 70 229);
+  background-color: rgb(238 242 255);
+}
+
+/* Scale buttons (for Likert scale) */
+.scale-btn {
+  flex: 1;
+  padding: 0.75rem;
+  border: 2px solid rgb(229 231 235);
+  border-radius: 0.5rem;
+  background-color: white;
+  font-weight: 500;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.scale-btn:hover {
+  border-color: rgb(209 213 219);
+}
+
+.scale-btn.selected {
+  border-color: rgb(79 70 229);
+  background-color: rgb(238 242 255);
+  color: rgb(67 56 202);
+}
+
+/* Badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 9999px;
+}
+
+.badge-success {
+  background-color: rgb(220 252 231);
+  color: rgb(22 101 52);
+}
+
+.badge-warning {
+  background-color: rgb(254 249 195);
+  color: rgb(133 77 14);
+}
+
+.badge-info {
+  background-color: rgb(224 231 255);
+  color: rgb(55 48 163);
+}
+
+/* Avatar */
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 9999px;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.avatar-indigo {
+  background-color: rgb(224 231 255);
+  color: rgb(79 70 229);
+}
+
+.avatar-purple {
+  background-color: rgb(243 232 255);
+  color: rgb(147 51 234);
+}
+
+/* Stats card */
+.stat-card {
+  text-align: center;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 0.75rem;
+  border: 1px solid rgb(229 231 235);
+}
+
+.stat-value {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: rgb(79 70 229);
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: rgb(107 114 128);
+}
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: rgb(107 114 128);
+}
+
+.empty-state-title {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: rgb(55 65 81);
+  margin-bottom: 0.5rem;
+}
