@@ -1,9 +1,20 @@
 import OpenAI from 'openai';
 import type { User } from '../types/index.js';
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
-});
+// Lazily initialize OpenAI client only when needed
+let openaiClient: OpenAI | null = null;
+
+function getOpenAIClient(): OpenAI | null {
+  if (!process.env.OPENAI_API_KEY) {
+    return null;
+  }
+  if (!openaiClient) {
+    openaiClient = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY
+    });
+  }
+  return openaiClient;
+}
 
 interface SharedResponse {
   question_id: number;
@@ -26,7 +37,8 @@ export async function findCommonGround(
   user2: User,
   sharedResponses: SharedResponse[]
 ): Promise<CommonGroundAnalysis | null> {
-  if (!process.env.OPENAI_API_KEY) {
+  const openai = getOpenAIClient();
+  if (!openai) {
     console.log('OpenAI API key not configured, skipping analysis');
     return null;
   }
