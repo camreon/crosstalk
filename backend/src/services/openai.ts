@@ -6,8 +6,10 @@ let openaiClient: OpenAI | null = null;
 
 function getOpenAIClient(): OpenAI | null {
   if (!process.env.OPENAI_API_KEY) {
+    console.log('OPENAI_API_KEY not found in environment');
     return null;
   }
+  console.log('OPENAI_API_KEY found, initializing client');
   if (!openaiClient) {
     openaiClient = new OpenAI({
       apiKey: process.env.OPENAI_API_KEY
@@ -90,7 +92,7 @@ Respond in JSON format:
 
   try {
     const response = await openai.chat.completions.create({
-      model: 'gpt-4',
+      model: 'gpt-4o-mini',
       messages: [
         {
           role: 'system',
