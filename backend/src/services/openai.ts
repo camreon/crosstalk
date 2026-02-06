@@ -34,11 +34,37 @@ export interface CommonGroundAnalysis {
   conversation_starters: string[];
 }
 
+// In-memory cache for findCommonGround results (key -> CommonGroundAnalysis)
+const commonGroundCache = new Map<string, CommonGroundAnalysis>();
+
+function getCommonGroundCacheKey(
+  user1: User,
+  user2: User,
+  sharedResponses: SharedResponse[]
+): string {
+  const id1 = user1.id;
+  const id2 = user2.id;
+  const [low, high] = id1 < id2 ? [id1, id2] : [id2, id1];
+  const responsesPayload = JSON.stringify(
+    sharedResponses
+      .slice()
+      .sort((a, b) => a.question_id - b.question_id)
+      .map(r => ({ q: r.question_id, t: r.topic_name, a1: r.user1_answer, a2: r.user2_answer }))
+  );
+  return `common_ground:${low}:${high}:${responsesPayload}`;
+}
+
 export async function findCommonGround(
   user1: User,
   user2: User,
   sharedResponses: SharedResponse[]
 ): Promise<CommonGroundAnalysis | null> {
+  const cacheKey = getCommonGroundCacheKey(user1, user2, sharedResponses);
+  const cached = commonGroundCache.get(cacheKey);
+  if (cached !== undefined) {
+    return cached;
+  }
+
   const openai = getOpenAIClient();
   if (!openai) {
     console.log('OpenAI API key not configured, skipping analysis');
@@ -114,6 +140,7 @@ Respond in JSON format:
 
     // Parse the JSON response
     const analysis = JSON.parse(content) as CommonGroundAnalysis;
+    commonGroundCache.set(cacheKey, analysis);
     return analysis;
   } catch (error) {
     console.error('Error calling OpenAI:', error);
