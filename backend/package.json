@@ -1,6 +1,7 @@
 {
   "name": "crosstalk-backend",
   "version": "1.0.0",
+  "type": "module",
   "description": "Cross Talk API Server",
   "main": "dist/index.js",
   "scripts": {

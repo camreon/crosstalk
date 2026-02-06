@@ -1,20 +1,20 @@
-import Database from 'better-sqlite3';
+import Database, { type Database as DatabaseType } from 'better-sqlite3';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import fs from 'fs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const dbPath = path.join(__dirname, '../../data/crosstalk.db');
+const dbPath = process.env.DATABASE_PATH || path.join(__dirname, '../../data/crosstalk.db');
 
 // Ensure data directory exists
-import fs from 'fs';
 const dataDir = path.dirname(dbPath);
 if (!fs.existsSync(dataDir)) {
   fs.mkdirSync(dataDir, { recursive: true });
 }
 
-export const db = new Database(dbPath);
+export const db: DatabaseType = new Database(dbPath);
 
 export function initDatabase() {
   // Enable foreign keys

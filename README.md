@@ -1,5 +1,7 @@
 # Cross Talk
 
+https://cross-talk.fly.dev/
+
 A political discussion platform that helps people with opposing views find common ground.
 
 ## Overview
